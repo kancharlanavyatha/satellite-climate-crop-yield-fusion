@@ -1,0 +1,72 @@
+{
+  "Tabular - Ridge": {
+    "MAE": 0.5037,
+    "RMSE": 0.617,
+    "MSE": 0.3807,
+    "R2": 0.1315,
+    "MAPE_pct": 17.75
+  },
+  "Tabular - Random Forest": {
+    "MAE": 0.4564,
+    "RMSE": 0.5592,
+    "MSE": 0.3127,
+    "R2": 0.2867,
+    "MAPE_pct": 15.9
+  },
+  "Tabular - XGBoost": {
+    "MAE": 0.451,
+    "RMSE": 0.5458,
+    "MSE": 0.2979,
+    "R2": 0.3203,
+    "MAPE_pct": 16.0
+  },
+  "Tabular - LightGBM": {
+    "MAE": 0.4431,
+    "RMSE": 0.5529,
+    "MSE": 0.3056,
+    "R2": 0.3027,
+    "MAPE_pct": 15.57
+  },
+  "Satellite - Random Forest": {
+    "MAE": 0.5898,
+    "RMSE": 0.7133,
+    "MSE": 0.5088,
+    "R2": -0.1608,
+    "MAPE_pct": 20.27
+  },
+  "Satellite - XGBoost": {
+    "MAE": 0.5788,
+    "RMSE": 0.705,
+    "MSE": 0.497,
+    "R2": -0.1338,
+    "MAPE_pct": 19.9
+  },
+  "Combined - Random Forest": {
+    "MAE": 0.4887,
+    "RMSE": 0.6037,
+    "MSE": 0.3645,
+    "R2": 0.1685,
+    "MAPE_pct": 16.84
+  },
+  "Combined - Extra Trees": {
+    "MAE": 0.4939,
+    "RMSE": 0.5879,
+    "MSE": 0.3457,
+    "R2": 0.2114,
+    "MAPE_pct": 16.9
+  },
+  "Combined - XGBoost": {
+    "MAE": 0.4698,
+    "RMSE": 0.5888,
+    "MSE": 0.3467,
+    "R2": 0.2091,
+    "MAPE_pct": 16.35
+  },
+  "Combined - LightGBM": {
+    "MAE": 0.4517,
+    "RMSE": 0.5677,
+    "MSE": 0.3223,
+    "R2": 0.2646,
+    "MAPE_pct": 15.99
+  }
+}

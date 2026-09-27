@@ -1,0 +1,23 @@
+{
+  "tabular_features": [
+    "SownArea",
+    "HeatStressDays_gt35C",
+    "Rain_Early_mm",
+    "Rain_Late_mm",
+    "Rain_Mid_mm",
+    "Rain_Total_mm",
+    "Temp_Mean_C",
+    "Clay_pct",
+    "Elevation_m",
+    "OrganicCarbon_g_kg",
+    "Sand_pct",
+    "Slope_deg",
+    "Soil_pH",
+    "Rain_Early_Share",
+    "Rain_Mid_Share",
+    "Rain_Late_Share",
+    "Rain_GrowthPhase_mm",
+    "Rain_Seasonality_Index",
+    "Heat_Rain_Stress"
+  ]
+}

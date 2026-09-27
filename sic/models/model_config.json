@@ -1,0 +1,19 @@
+{
+  "model_name": "PyTorch Deep Multimodal YieldNet",
+  "num_tabular_features": 19,
+  "tile_shape": [
+    224,
+    224,
+    6
+  ],
+  "target": "Yield_Tonne_per_Hectare",
+  "crop": "Rice",
+  "season": "Kharif",
+  "state": "Andhra Pradesh",
+  "metrics_loyo_cv": {
+    "MAE_t_ha": 0.3951,
+    "RMSE_t_ha": 0.4912,
+    "R2_score": 0.4496,
+    "MAPE_pct": 14.12
+  }
+}

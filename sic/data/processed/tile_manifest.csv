@@ -1,0 +1,66 @@
+District,Year,tile_path,tile_nodata_fraction
+Anantapur,2017,data\processed\tiles\Anantapur_2017.npy,0.9189
+Chittoor,2017,data\processed\tiles\Chittoor_2017.npy,0.7989
+East Godavari,2017,data\processed\tiles\East_Godavari_2017.npy,0.8427
+Guntur,2017,data\processed\tiles\Guntur_2017.npy,0.7486
+Kadapa,2017,data\processed\tiles\Kadapa_2017.npy,0.4494
+Krishna,2017,data\processed\tiles\Krishna_2017.npy,0.8838
+Kurnool,2017,data\processed\tiles\Kurnool_2017.npy,0.8409
+Nellore,2017,data\processed\tiles\Nellore_2017.npy,0.802
+Prakasam,2017,data\processed\tiles\Prakasam_2017.npy,0.8891
+Srikakulam,2017,data\processed\tiles\Srikakulam_2017.npy,0.7562
+Visakhapatnam,2017,data\processed\tiles\Visakhapatnam_2017.npy,0.8874
+Vizianagaram,2017,data\processed\tiles\Vizianagaram_2017.npy,0.5729
+West Godavari,2017,data\processed\tiles\West_Godavari_2017.npy,0.8911
+Anantapur,2018,data\processed\tiles\Anantapur_2018.npy,0.5515
+Chittoor,2018,data\processed\tiles\Chittoor_2018.npy,0.9394
+East Godavari,2018,data\processed\tiles\East_Godavari_2018.npy,0.5226
+Guntur,2018,data\processed\tiles\Guntur_2018.npy,0.558
+Kadapa,2018,data\processed\tiles\Kadapa_2018.npy,0.4493
+Krishna,2018,data\processed\tiles\Krishna_2018.npy,0.6824
+Kurnool,2018,data\processed\tiles\Kurnool_2018.npy,0.4936
+Nellore,2018,data\processed\tiles\Nellore_2018.npy,0.9333
+Prakasam,2018,data\processed\tiles\Prakasam_2018.npy,0.8545
+Srikakulam,2018,data\processed\tiles\Srikakulam_2018.npy,0.6509
+Visakhapatnam,2018,data\processed\tiles\Visakhapatnam_2018.npy,0.5461
+Vizianagaram,2018,data\processed\tiles\Vizianagaram_2018.npy,0.5565
+West Godavari,2018,data\processed\tiles\West_Godavari_2018.npy,0.442
+Anantapur,2019,data\processed\tiles\Anantapur_2019.npy,0.3893
+Chittoor,2019,data\processed\tiles\Chittoor_2019.npy,0.5341
+East Godavari,2019,data\processed\tiles\East_Godavari_2019.npy,0.5199
+Guntur,2019,data\processed\tiles\Guntur_2019.npy,0.4831
+Kadapa,2019,data\processed\tiles\Kadapa_2019.npy,0.4493
+Krishna,2019,data\processed\tiles\Krishna_2019.npy,0.6816
+Kurnool,2019,data\processed\tiles\Kurnool_2019.npy,0.3953
+Nellore,2019,data\processed\tiles\Nellore_2019.npy,0.4878
+Prakasam,2019,data\processed\tiles\Prakasam_2019.npy,0.3682
+Srikakulam,2019,data\processed\tiles\Srikakulam_2019.npy,0.6325
+Visakhapatnam,2019,data\processed\tiles\Visakhapatnam_2019.npy,0.5363
+Vizianagaram,2019,data\processed\tiles\Vizianagaram_2019.npy,0.5538
+West Godavari,2019,data\processed\tiles\West_Godavari_2019.npy,0.4419
+Anantapur,2020,data\processed\tiles\Anantapur_2020.npy,0.3893
+Chittoor,2020,data\processed\tiles\Chittoor_2020.npy,0.5342
+East Godavari,2020,data\processed\tiles\East_Godavari_2020.npy,0.5208
+Guntur,2020,data\processed\tiles\Guntur_2020.npy,0.4831
+Kadapa,2020,data\processed\tiles\Kadapa_2020.npy,0.4493
+Krishna,2020,data\processed\tiles\Krishna_2020.npy,0.6816
+Kurnool,2020,data\processed\tiles\Kurnool_2020.npy,0.3954
+Nellore,2020,data\processed\tiles\Nellore_2020.npy,0.4879
+Prakasam,2020,data\processed\tiles\Prakasam_2020.npy,0.3682
+Srikakulam,2020,data\processed\tiles\Srikakulam_2020.npy,0.6326
+Visakhapatnam,2020,data\processed\tiles\Visakhapatnam_2020.npy,0.5363
+Vizianagaram,2020,data\processed\tiles\Vizianagaram_2020.npy,0.5538
+West Godavari,2020,data\processed\tiles\West_Godavari_2020.npy,0.4425
+Anantapur,2021,data\processed\tiles\Anantapur_2021.npy,0.3893
+Chittoor,2021,data\processed\tiles\Chittoor_2021.npy,0.5341
+East Godavari,2021,data\processed\tiles\East_Godavari_2021.npy,0.5199
+Guntur,2021,data\processed\tiles\Guntur_2021.npy,0.4831
+Kadapa,2021,data\processed\tiles\Kadapa_2021.npy,0.4493
+Krishna,2021,data\processed\tiles\Krishna_2021.npy,0.6816
+Kurnool,2021,data\processed\tiles\Kurnool_2021.npy,0.3954
+Nellore,2021,data\processed\tiles\Nellore_2021.npy,0.4879
+Prakasam,2021,data\processed\tiles\Prakasam_2021.npy,0.3682
+Srikakulam,2021,data\processed\tiles\Srikakulam_2021.npy,0.6326
+Visakhapatnam,2021,data\processed\tiles\Visakhapatnam_2021.npy,0.5363
+Vizianagaram,2021,data\processed\tiles\Vizianagaram_2021.npy,0.5539
+West Godavari,2021,data\processed\tiles\West_Godavari_2021.npy,0.4419

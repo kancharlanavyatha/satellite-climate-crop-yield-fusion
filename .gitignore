@@ -1,0 +1,27 @@
+# Python bytecode & cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Jupyter / IDEs
+.ipynb_checkpoints
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs & temp files
+*.log
+scratch/
+
+# Large raw yield CSV (>50MB, download instructions provided in README)
+sic/data/raw/yeild_area/crop-wise-area-production-yield.csv

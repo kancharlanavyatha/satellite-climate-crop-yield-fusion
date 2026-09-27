@@ -1,0 +1,44 @@
+{
+  "Hybrid - XGBoost": {
+    "MAE": 0.4924,
+    "RMSE": 0.6022,
+    "MSE": 0.3626,
+    "R2": 0.1728,
+    "MAPE_pct": 16.99
+  },
+  "Hybrid - LightGBM": {
+    "MAE": 0.4949,
+    "RMSE": 0.6022,
+    "MSE": 0.3626,
+    "R2": 0.1728,
+    "MAPE_pct": 17.02
+  },
+  "Hybrid - Extra Trees": {
+    "MAE": 0.5144,
+    "RMSE": 0.6221,
+    "MSE": 0.387,
+    "R2": 0.117,
+    "MAPE_pct": 17.71
+  },
+  "Hybrid - Gradient Boosting": {
+    "MAE": 0.491,
+    "RMSE": 0.62,
+    "MSE": 0.3844,
+    "R2": 0.1231,
+    "MAPE_pct": 17.22
+  },
+  "Hybrid - Random Forest": {
+    "MAE": 0.5032,
+    "RMSE": 0.6208,
+    "MSE": 0.3854,
+    "R2": 0.1207,
+    "MAPE_pct": 17.49
+  },
+  "Multimodal Ensemble (Hybrid GBDT)": {
+    "MAE": 0.4895,
+    "RMSE": 0.5938,
+    "MSE": 0.3526,
+    "R2": 0.1956,
+    "MAPE_pct": 16.87
+  }
+}

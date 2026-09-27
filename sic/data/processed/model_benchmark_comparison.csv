@@ -1,0 +1,18 @@
+Model Architecture,Modality,MAE,RMSE,MSE,R2,MAPE_pct
+PyTorch Deep Multimodal YieldNet (Champion),Deep Multimodal (CNN Satellite + MLP Tabular),0.3951,0.4912,0.2413,0.4496,14.12
+Tabular - XGBoost,Unimodal / Tabular Baseline,0.451,0.5458,0.2979,0.3203,16.0
+Tabular - LightGBM,Unimodal / Tabular Baseline,0.4431,0.5529,0.3056,0.3027,15.57
+Tabular - Random Forest,Unimodal / Tabular Baseline,0.4564,0.5592,0.3127,0.2867,15.9
+Combined - LightGBM,Unimodal / Tabular Baseline,0.4517,0.5677,0.3223,0.2646,15.99
+Combined - Extra Trees,Unimodal / Tabular Baseline,0.4939,0.5879,0.3457,0.2114,16.9
+Combined - XGBoost,Unimodal / Tabular Baseline,0.4698,0.5888,0.3467,0.2091,16.35
+Multimodal Ensemble (Hybrid GBDT),Hybrid (CNN Embeddings + GBDT),0.4895,0.5938,0.3526,0.1956,16.87
+Hybrid - LightGBM,Hybrid (CNN Embeddings + GBDT),0.4949,0.6022,0.3626,0.1728,17.02
+Hybrid - XGBoost,Hybrid (CNN Embeddings + GBDT),0.4924,0.6022,0.3626,0.1728,16.99
+Combined - Random Forest,Unimodal / Tabular Baseline,0.4887,0.6037,0.3645,0.1685,16.84
+Tabular - Ridge,Unimodal / Tabular Baseline,0.5037,0.617,0.3807,0.1315,17.75
+Hybrid - Gradient Boosting,Hybrid (CNN Embeddings + GBDT),0.491,0.62,0.3844,0.1231,17.22
+Hybrid - Random Forest,Hybrid (CNN Embeddings + GBDT),0.5032,0.6208,0.3854,0.1207,17.49
+Hybrid - Extra Trees,Hybrid (CNN Embeddings + GBDT),0.5144,0.6221,0.387,0.117,17.71
+Satellite - XGBoost,Unimodal / Tabular Baseline,0.5788,0.705,0.497,-0.1338,19.9
+Satellite - Random Forest,Unimodal / Tabular Baseline,0.5898,0.7133,0.5088,-0.1608,20.27

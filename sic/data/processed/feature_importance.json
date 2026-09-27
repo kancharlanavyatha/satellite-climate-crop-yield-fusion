@@ -1,0 +1,195 @@
+{
+  "top_features": [
+    {
+      "Feature": "Heat_Rain_Stress",
+      "Importance": 0.1173384406607869,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "HeatStressDays_gt35C",
+      "Importance": 0.10563932414393629,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "Temp_Mean_C",
+      "Importance": 0.09748869848287356,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "Slope_deg",
+      "Importance": 0.09634051982012018,
+      "Category": "Soil & Terrain"
+    },
+    {
+      "Feature": "Rain_Total_mm",
+      "Importance": 0.044454364403009046,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "Rain_Mid_mm",
+      "Importance": 0.03473789927876238,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "ndvi_p10",
+      "Importance": 0.029722405252398696,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "Elevation_m",
+      "Importance": 0.02893692201804876,
+      "Category": "Soil & Terrain"
+    },
+    {
+      "Feature": "Clay_pct",
+      "Importance": 0.02834620320453047,
+      "Category": "Soil & Terrain"
+    },
+    {
+      "Feature": "Rain_GrowthPhase_mm",
+      "Importance": 0.027685279567619143,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "Soil_pH",
+      "Importance": 0.02644739948321549,
+      "Category": "Soil & Terrain"
+    },
+    {
+      "Feature": "Rain_Mid_Share",
+      "Importance": 0.025649273977164298,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "Rain_Early_Share",
+      "Importance": 0.024826234767617764,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "Rain_Late_mm",
+      "Importance": 0.022962891549617614,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "ndwi_std",
+      "Importance": 0.021860725270844896,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "Rain_Seasonality_Index",
+      "Importance": 0.019923129971904915,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "valid_pixel_ratio",
+      "Importance": 0.0183624831235311,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "nir_mean",
+      "Importance": 0.016728505210034487,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "Rain_Late_Share",
+      "Importance": 0.016183728276156953,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "nir_std",
+      "Importance": 0.016085503884217235,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "ndvi_std",
+      "Importance": 0.015516629826791944,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "blue_mean",
+      "Importance": 0.01452272907731202,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "Sand_pct",
+      "Importance": 0.014458306883573599,
+      "Category": "Soil & Terrain"
+    },
+    {
+      "Feature": "evi_std",
+      "Importance": 0.013492604295188584,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "Rain_Early_mm",
+      "Importance": 0.013447206495824784,
+      "Category": "Weather & Climate Stress"
+    },
+    {
+      "Feature": "SownArea",
+      "Importance": 0.013096104165468001,
+      "Category": "Agriculture / Management"
+    },
+    {
+      "Feature": "OrganicCarbon_g_kg",
+      "Importance": 0.01012729626725173,
+      "Category": "Soil & Terrain"
+    },
+    {
+      "Feature": "ndvi_p90",
+      "Importance": 0.009803531751373797,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "green_mean",
+      "Importance": 0.00978411288162556,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "evi_mean",
+      "Importance": 0.009495187838444186,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "savi_mean",
+      "Importance": 0.009174391369985282,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "gcvi_mean",
+      "Importance": 0.008922687217914924,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "ndwi_median",
+      "Importance": 0.008833205250921012,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "red_mean",
+      "Importance": 0.008419580426740137,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "ndwi_mean",
+      "Importance": 0.007845004798690717,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "ndvi_mean",
+      "Importance": 0.0073395701388053155,
+      "Category": "Satellite Spectral Indices"
+    },
+    {
+      "Feature": "ndvi_median",
+      "Importance": 0.006001918967698356,
+      "Category": "Satellite Spectral Indices"
+    }
+  ],
+  "modality_shares": {
+    "Agriculture / Management": 0.013096104165468001,
+    "Satellite Spectral Indices": 0.23191077658251824,
+    "Soil & Terrain": 0.20465664767674022,
+    "Weather & Climate Stress": 0.5503364715752737
+  }
+}
