@@ -24,6 +24,25 @@ TABULAR_COLS = [
 ]
 
 
+def resolve_tile_path(root: Path, tile_path_str: str) -> Path:
+    clean_str = str(tile_path_str).replace("\\", "/")
+    fname = Path(clean_str).name
+    
+    candidates = [
+        Path(clean_str),
+        root / clean_str,
+        root.parent / clean_str,
+        root / "data" / "processed" / "tiles" / fname,
+        root.parent / "data" / "processed" / "tiles" / fname,
+        root / "sic" / "data" / "processed" / "tiles" / fname,
+        Path("/content/satellite-climate-crop-yield-fusion/sic/data/processed/tiles") / fname,
+    ]
+    for c in candidates:
+        if c.exists():
+            return c
+    return root / clean_str
+
+
 class MultimodalYieldNet(nn.Module):
     def __init__(self, num_tabular_features: int = 19, img_embed_dim: int = 32, tab_embed_dim: int = 32):
         super().__init__()
@@ -124,7 +143,7 @@ class YieldPredictor:
 
     def _prepare_tile(self, tile_input: Path | str | np.ndarray) -> torch.Tensor:
         if isinstance(tile_input, (str, Path)):
-            tile_path = Path(tile_input)
+            tile_path = resolve_tile_path(ROOT, str(tile_input))
             if not tile_path.exists():
                 raise FileNotFoundError(f"Tile file not found: {tile_path}")
             arr = np.load(tile_path).astype("float32")
@@ -141,7 +160,6 @@ class YieldPredictor:
         else:
             raise ValueError(f"Invalid tile shape: {arr.shape}, expected (224, 224, 6) or (6, 224, 224).")
 
-        # Add batch dimension: (1, 6, 224, 224)
         return torch.tensor(arr, dtype=torch.float32).unsqueeze(0).to(self.device)
 
     def _prepare_tabular(self, tabular_input: dict | pd.Series | pd.DataFrame) -> torch.Tensor:
@@ -160,11 +178,6 @@ class YieldPredictor:
         return torch.tensor(scaled, dtype=torch.float32).to(self.device)
 
     def predict_single(self, tabular_input: dict | pd.Series, tile_input: Path | str | np.ndarray) -> float:
-        """Compute yield prediction for a single district-year sample.
-
-        Returns:
-            predicted_yield_t_ha (float): Yield in Tonnes/Hectare.
-        """
         tile_t = self._prepare_tile(tile_input)
         tab_t = self._prepare_tabular(tabular_input)
 
@@ -174,7 +187,6 @@ class YieldPredictor:
         return round(pred, 4)
 
     def predict_dataframe(self, df: pd.DataFrame, root_dir: Path | str = None) -> np.ndarray:
-        """Compute yield predictions for a pandas DataFrame."""
         if root_dir is None:
             root_dir = ROOT
         else:
@@ -182,7 +194,7 @@ class YieldPredictor:
 
         preds = []
         for _, row in df.iterrows():
-            tile_path = root_dir / row["tile_path"] if "tile_path" in row else row["tile_file"]
+            tile_path = resolve_tile_path(root_dir, row["tile_path"] if "tile_path" in row else row["tile_file"])
             pred = self.predict_single(row, tile_path)
             preds.append(pred)
         return np.array(preds)
@@ -196,7 +208,7 @@ def main():
     if data_csv.exists():
         df = pd.read_csv(data_csv)
         sample = df.iloc[0]
-        tile_file = ROOT / sample["tile_path"]
+        tile_file = resolve_tile_path(ROOT, sample["tile_path"])
         
         pred_yield = predictor.predict_single(sample.to_dict(), tile_file)
         actual_yield = sample["Yield_Tonne_per_Hectare"]

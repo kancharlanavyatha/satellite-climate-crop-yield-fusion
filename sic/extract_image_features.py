@@ -14,20 +14,25 @@ OUTPUT_CSV = ROOT / "data" / "processed" / "multimodal_features_extracted.csv"
 
 
 def resolve_tile_path(root: Path, tile_path_str: str) -> Path:
-    p1 = root / tile_path_str
-    if p1.exists():
-        return p1
-    p2 = root.parent / tile_path_str
-    if p2.exists():
-        return p2
-    p3 = root / "data" / "processed" / "tiles" / Path(tile_path_str).name
-    if p3.exists():
-        return p3
-    return p1
+    clean_str = str(tile_path_str).replace("\\", "/")
+    fname = Path(clean_str).name
+    
+    candidates = [
+        root / clean_str,
+        root.parent / clean_str,
+        root / "data" / "processed" / "tiles" / fname,
+        root.parent / "data" / "processed" / "tiles" / fname,
+        root / "sic" / "data" / "processed" / "tiles" / fname,
+        Path("/content/satellite-climate-crop-yield-fusion/sic/data/processed/tiles") / fname,
+    ]
+    for c in candidates:
+        if c.exists():
+            return c
+    return root / clean_str
 
 
 def process_tile(tile_path: Path) -> dict:
-    arr = np.load(tile_path)  # Shape: (224, 224, 6)
+    arr = np.load(tile_path)
     b2 = arr[..., 0]
     b3 = arr[..., 1]
     b4 = arr[..., 2]

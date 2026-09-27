@@ -31,16 +31,21 @@ TABULAR_COLS = [
 
 
 def resolve_tile_path(root: Path, tile_path_str: str) -> Path:
-    p1 = root / tile_path_str
-    if p1.exists():
-        return p1
-    p2 = root.parent / tile_path_str
-    if p2.exists():
-        return p2
-    p3 = root / "data" / "processed" / "tiles" / Path(tile_path_str).name
-    if p3.exists():
-        return p3
-    return p1
+    clean_str = str(tile_path_str).replace("\\", "/")
+    fname = Path(clean_str).name
+    
+    candidates = [
+        root / clean_str,
+        root.parent / clean_str,
+        root / "data" / "processed" / "tiles" / fname,
+        root.parent / "data" / "processed" / "tiles" / fname,
+        root / "sic" / "data" / "processed" / "tiles" / fname,
+        Path("/content/satellite-climate-crop-yield-fusion/sic/data/processed/tiles") / fname,
+    ]
+    for c in candidates:
+        if c.exists():
+            return c
+    return root / clean_str
 
 
 def set_seed(seed: int = 42):
