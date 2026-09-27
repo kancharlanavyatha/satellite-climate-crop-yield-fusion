@@ -4,24 +4,6 @@ A **Multimodal Deep Learning & Machine Learning System** for predicting district
 
 ---
 
-##  System Workflow & Responsibilities
-
-```
-Satellite + Weather/Soil/Other Data
-       │
-       ▼
-Person 1: Data Collection & Feature Engineering (Sentinel Tiles, Soil, Climate Indices)
-       │
-       ▼
-Person 2: ML/DL Modeling (PyTorch Deep Multimodal YieldNet, LOYO CV, Benchmarks)
-       │
-       ▼
-Person 3: Application / Dashboard & Visualization (YieldPredictor API Integration)
-       │
-       ▼
-Final Crop Yield Prediction Result (Tonnes/Hectare)
-```
-
 
 ##  Model Benchmark Performance (Leave-One-Year-Out CV)
 
