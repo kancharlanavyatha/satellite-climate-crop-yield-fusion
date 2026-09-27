@@ -1,19 +1,10 @@
 """Sanity-check the .npy tiles produced by clean_sentinel_tiles.py.
 
 Checks every tile for shape/dtype/NaN problems and blank (all-zero) tiles,
-then saves a handful of visual previews -- a true-color composite and an
-NDVI heatmap -- so you can actually look at a sample and confirm they
-resemble real satellite imagery of a district, not noise.
-
-Run from the workspace root after clean_sentinel_tiles.py:
-    python sic/inspect_tiles.py
-
-Requires: numpy, pandas, matplotlib
-    pip install matplotlib --break-system-packages
+then saves visual previews.
 """
 
 from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -24,13 +15,21 @@ PREVIEW_DIR = ROOT / "data" / "processed" / "tile_previews"
 
 EXPECTED_SHAPE = (224, 224, 6)
 BAND_NAMES = ["B2", "B3", "B4", "B8", "NDVI", "NDWI"]
-
-# Sentinel-2 SR reflectance bands are scaled ~0-10000 (not 0-1). Anything far
-# outside this is a sign something went wrong upstream (wrong band order,
-# unscaled data, etc). NDVI/NDWI are normalized differences and must be in
-# [-1, 1] by definition -- any value outside that range is a bug, not noise.
 REFLECTANCE_MAX_PLAUSIBLE = 15000
-N_PREVIEWS = 6  # how many tiles to render as images, spread across the manifest
+N_PREVIEWS = 6
+
+
+def resolve_tile_path(root: Path, tile_path_str: str) -> Path:
+    p1 = root / tile_path_str
+    if p1.exists():
+        return p1
+    p2 = root.parent / tile_path_str
+    if p2.exists():
+        return p2
+    p3 = root / "data" / "processed" / "tiles" / Path(tile_path_str).name
+    if p3.exists():
+        return p3
+    return p1
 
 
 def check_tile(path: Path) -> dict:
@@ -64,9 +63,7 @@ def check_tile(path: Path) -> dict:
 
 
 def save_preview(district: str, year: int, arr: np.ndarray, out_dir: Path) -> None:
-    # Bands: 0=B2(blue) 1=B3(green) 2=B4(red) 3=B8(NIR) 4=NDVI 5=NDWI
-    rgb = arr[..., [2, 1, 0]]  # true color = R, G, B
-    # Reflectance bands aren't 0-1, so stretch to the tile's own range for display
+    rgb = arr[..., [2, 1, 0]]
     denom = (rgb.max() - rgb.min()) or 1.0
     rgb_display = np.clip((rgb - rgb.min()) / denom, 0, 1)
     ndvi = arr[..., 4]
@@ -94,7 +91,7 @@ def main() -> None:
     checked = 0
 
     for _, row in manifest.iterrows():
-        tile_path = ROOT / row["tile_path"]
+        tile_path = resolve_tile_path(ROOT, row["tile_path"])
         if not tile_path.exists():
             problem_rows.append((row["District"], row["Year"], ["file missing on disk"]))
             continue
@@ -111,27 +108,19 @@ def main() -> None:
     else:
         print("No structural or range issues found in any tile.")
 
-    # Preview the worst- and best-quality tiles by nodata fraction, rather than
-    # a random spread -- this is what actually tells you whether your poorest
-    # rows (like the one you're worried about) are salvageable or should be
-    # dropped, and gives you a real best-case tile to compare against.
     n_each = max(1, N_PREVIEWS // 2)
     ranked = manifest.sort_values("tile_nodata_fraction")
     sample = pd.concat([ranked.head(n_each), ranked.tail(n_each)]).drop_duplicates()
-    print(f"\nPreviewing the {n_each} cleanest and {n_each} noisiest tiles by tile_nodata_fraction.")
+    print(f"\nPreviewing {len(sample)} tiles by tile_nodata_fraction.")
     for _, row in sample.iterrows():
-        tile_path = ROOT / row["tile_path"]
+        tile_path = resolve_tile_path(ROOT, row["tile_path"])
         if not tile_path.exists():
             continue
         arr = np.load(tile_path)
         if arr.shape == EXPECTED_SHAPE:
             save_preview(row["District"], row["Year"], arr, PREVIEW_DIR)
 
-    print(f"\nSaved {len(sample)} preview image(s) to: {PREVIEW_DIR}")
-    print("Open those PNGs -- the left panel should look like a real aerial/"
-          "satellite photo of farmland (greens/browns, field patterns), and "
-          "the right NDVI panel should show green over vegetated cropland and "
-          "red/yellow over bare soil or water, not a uniform flat color.")
+    print(f"Saved {len(sample)} preview image(s) to: {PREVIEW_DIR}")
 
 
 if __name__ == "__main__":

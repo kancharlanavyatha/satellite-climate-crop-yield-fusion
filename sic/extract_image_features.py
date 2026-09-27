@@ -13,9 +13,21 @@ FINAL_CSV = ROOT / "data" / "processed" / "final_features_with_tiles.csv"
 OUTPUT_CSV = ROOT / "data" / "processed" / "multimodal_features_extracted.csv"
 
 
+def resolve_tile_path(root: Path, tile_path_str: str) -> Path:
+    p1 = root / tile_path_str
+    if p1.exists():
+        return p1
+    p2 = root.parent / tile_path_str
+    if p2.exists():
+        return p2
+    p3 = root / "data" / "processed" / "tiles" / Path(tile_path_str).name
+    if p3.exists():
+        return p3
+    return p1
+
+
 def process_tile(tile_path: Path) -> dict:
     arr = np.load(tile_path)  # Shape: (224, 224, 6)
-    # Channels: 0:B2 (Blue), 1:B3 (Green), 2:B4 (Red), 3:B8 (NIR), 4:NDVI, 5:NDWI
     b2 = arr[..., 0]
     b3 = arr[..., 1]
     b4 = arr[..., 2]
@@ -23,14 +35,12 @@ def process_tile(tile_path: Path) -> dict:
     ndvi = arr[..., 4]
     ndwi = arr[..., 5]
 
-    # Valid mask: pixels where NIR > 0 (non-background padding)
     valid_mask = b8 > 0
     valid_count = np.sum(valid_mask)
     total_count = arr.shape[0] * arr.shape[1]
     valid_ratio = valid_count / total_count if total_count > 0 else 0.0
 
     if valid_count == 0:
-        # Fallback if entire tile is zero
         valid_mask = np.ones((arr.shape[0], arr.shape[1]), dtype=bool)
 
     v_b2 = b2[valid_mask]
@@ -40,8 +50,6 @@ def process_tile(tile_path: Path) -> dict:
     v_ndvi = ndvi[valid_mask]
     v_ndwi = ndwi[valid_mask]
 
-    # Derived indices
-    # Scaled reflectance (0-10000 to 0-1 range for index calculations)
     r = np.clip(v_b4 / 10000.0, 0, 1)
     g = np.clip(v_b3 / 10000.0, 0, 1)
     b = np.clip(v_b2 / 10000.0, 0, 1)
@@ -82,7 +90,7 @@ def main():
     extracted_rows = []
 
     for idx, row in df.iterrows():
-        tile_file = ROOT / row["tile_path"]
+        tile_file = resolve_tile_path(ROOT, row["tile_path"])
         if not tile_file.exists():
             raise FileNotFoundError(f"Tile file not found: {tile_file}")
         
@@ -92,9 +100,9 @@ def main():
         extracted_rows.append(full_row)
 
     out_df = pd.DataFrame(extracted_rows)
+    OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     out_df.to_csv(OUTPUT_CSV, index=False)
     print(f"Extracted image features for {len(out_df)} rows. Saved to: {OUTPUT_CSV}")
-    print("New image features added:", [col for col in out_df.columns if col not in df.columns])
 
 
 if __name__ == "__main__":

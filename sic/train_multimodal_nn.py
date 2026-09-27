@@ -30,6 +30,19 @@ TABULAR_COLS = [
 ]
 
 
+def resolve_tile_path(root: Path, tile_path_str: str) -> Path:
+    p1 = root / tile_path_str
+    if p1.exists():
+        return p1
+    p2 = root.parent / tile_path_str
+    if p2.exists():
+        return p2
+    p3 = root / "data" / "processed" / "tiles" / Path(tile_path_str).name
+    if p3.exists():
+        return p3
+    return p1
+
+
 def set_seed(seed: int = 42):
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -43,11 +56,9 @@ class CropYieldDataset(Dataset):
         # Load satellite tiles
         tiles = []
         for _, row in self.df.iterrows():
-            tile_file = self.root_path / row["tile_path"]
+            tile_file = resolve_tile_path(self.root_path, row["tile_path"])
             arr = np.load(tile_file).astype("float32") # (224, 224, 6)
-            # Channel scaling: reflectance 0-10000 -> 0-1, indices -1..1 keep as is
             arr[..., :4] = arr[..., :4] / 10000.0
-            # Move channels to first axis for PyTorch (6, 224, 224)
             arr_t = np.moveaxis(arr, -1, 0)
             tiles.append(arr_t)
             
@@ -76,22 +87,21 @@ class MultimodalYieldNet(nn.Module):
     def __init__(self, num_tabular_features: int = 19, img_embed_dim: int = 32, tab_embed_dim: int = 32):
         super().__init__()
         
-        # 1. Satellite Image CNN Encoder (Input: B x 6 x 224 x 224)
         self.cnn_encoder = nn.Sequential(
             nn.Conv2d(6, 16, kernel_size=3, stride=2, padding=1),
             nn.BatchNorm2d(16),
             nn.ReLU(),
-            nn.MaxPool2d(2, 2), # B x 16 x 56 x 56
+            nn.MaxPool2d(2, 2),
             
             nn.Conv2d(16, 32, kernel_size=3, stride=2, padding=1),
             nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.MaxPool2d(2, 2), # B x 32 x 14 x 14
+            nn.MaxPool2d(2, 2),
             
             nn.Conv2d(32, 64, kernel_size=3, stride=2, padding=1),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.AdaptiveAvgPool2d((1, 1)), # B x 64 x 1 x 1
+            nn.AdaptiveAvgPool2d((1, 1)),
             nn.Flatten(),
             
             nn.Linear(64, img_embed_dim),
@@ -99,7 +109,6 @@ class MultimodalYieldNet(nn.Module):
             nn.ReLU()
         )
         
-        # 2. Tabular MLP Encoder
         self.tab_encoder = nn.Sequential(
             nn.Linear(num_tabular_features, 32),
             nn.BatchNorm1d(32),
@@ -110,7 +119,6 @@ class MultimodalYieldNet(nn.Module):
             nn.ReLU()
         )
         
-        # 3. Multimodal Late Fusion Head
         fusion_in = img_embed_dim + tab_embed_dim
         self.fusion_head = nn.Sequential(
             nn.Linear(fusion_in, 32),
