@@ -4,8 +4,7 @@ import {
   BarChart, Bar, Cell, PieChart, Pie,
 } from "recharts";
 
-const API =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
+const API = import.meta.env.VITE_API_BASE_URL;
 const SLIDERS = {
   HeatStressDays_gt35C: "Heat stress days (>35°C)",
   Rain_Total_mm: "Total rainfall (mm)",
