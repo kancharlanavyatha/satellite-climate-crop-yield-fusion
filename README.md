@@ -58,21 +58,35 @@ print(f"Predicted Crop Yield: {predicted_yield:.4f} Tonnes/Hectare")
 
 ```
 .
-├── README.md                           # Repository documentation
-├── sic/
-│   ├── clean_yield_area.py             # Preprocesses raw crop yield labels
-│   ├── clean_senitel_tiles.py          # Validates & resizes Sentinel-2 GeoTIFF exports to 224x224x6 .npy tiles
-│   ├── feature_engineering.py          # Merges weather, soil, and climate stress tabular features
-│   ├── image_feature_engineering.py    # Merges tile manifest into tabular feature tables
-│   ├── extract_image_features.py       # Extracts NDVI, NDWI, EVI, SAVI, GCVI statistics
-│   ├── train_baselines.py              # LOYO CV for unimodal baseline ML models
-│   ├── train_multimodal_nn.py          # PyTorch Deep Multimodal YieldNet implementation
-│   ├── evaluate_and_compare.py         # Benchmarks all model architectures
-│   ├── export_pipeline.py              # Trains champion model & exports artifacts to models/
-│   ├── predict.py                      # Production inference API for Person 3 application integration
-│   ├── earth_engine/                   # Earth Engine JS export scripts
-│   ├── data/
-│   │   ├── raw/                        # Source boundary, soil, and weather datasets
-│   │   └── processed/                  # Cleaned features, manifests, benchmark results, & .npy tiles
-│   └── models/                         # Exported trained PyTorch model weights & scalers
+├── README.md
+├── api.py                              # FastAPI prediction service
+├── frontend/                           # React + Vite dashboard
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx                     # Dashboard UI
+│       ├── main.jsx                    # Frontend entry point
+│       └── styles.css
+└── sic/
+    ├── predict.py                      # Loads model artifacts and runs predictions
+    ├── clean_yield_area.py             # Preprocesses crop-yield labels
+    ├── clean_senitel_tiles.py          # Prepares Sentinel-2 image tiles
+    ├── feature_engineering.py          # Builds weather, climate, and soil features
+    ├── image_feature_engineering.py    # Joins image-tile metadata to tabular features
+    ├── extract_image_features.py       # Extracts satellite-index statistics
+    ├── train_baselines.py              # Trains/evaluates tabular baseline models
+    ├── train_multimodal_nn.py          # Defines and trains the multimodal model
+    ├── evaluate_and_compare.py         # Compares model performance
+    ├── export_pipeline.py              # Exports the trained model artifacts
+    ├── earth_engine/                   # Google Earth Engine export scripts
+    ├── models/                         # Trained weights, scaler, and model metadata
+    └── data/
+        ├── raw/                        # Source and intermediate input datasets
+        └── processed/
+            ├── multimodal_features_extracted.csv  # API input records
+            └── tiles/                  # Sentinel-2 .npy tiles used for inference
 ```
+
+`frontend/node_modules/`, Python caches, and other generated files are local build/runtime artifacts and are not part of the project structure.
