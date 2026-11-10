@@ -13,6 +13,7 @@ const SLIDERS = {
   Soil_pH: "Soil pH",
   Clay_pct: "Clay (%)",
 };
+
 const MODALITY = [
   { name: "Weather & Climate", value: 55.03, color: "#14532d" },
   { name: "Satellite Indices", value: 23.19, color: "#2f855a" },
