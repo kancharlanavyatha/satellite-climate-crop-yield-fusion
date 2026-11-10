@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
@@ -66,7 +66,7 @@ def meta():
 class Req(BaseModel):
     district: str
     year: int
-    overrides: dict[str, float] = {}
+    overrides: dict[str, float] = Field(default_factory=dict)
 
 
 @app.post("/api/predict")
