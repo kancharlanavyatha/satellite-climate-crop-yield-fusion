@@ -8,6 +8,9 @@ env/
 venv/
 .venv/
 ENV/
+frontend/node_modules/
+frontend/package-lock.json
+
 
 # Jupyter / IDEs
 .ipynb_checkpoints
